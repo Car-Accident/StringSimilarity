@@ -28,6 +28,10 @@ public class Similarity {
                 throw new IllegalArgumentException("String should not be null");
             }
 
+            if (str.length() == 0) {
+                throw new IllegalArgumentException("String should not be empty");
+            }
+
             for (char ch : str.toCharArray()) {
                 if (isAlphabet(ch) == false) {
                     throw new IllegalArgumentException("String should be alphabet");
