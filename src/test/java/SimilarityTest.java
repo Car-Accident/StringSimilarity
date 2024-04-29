@@ -33,6 +33,13 @@ class SimilarityTest {
         assertEquals(51, new Similarity("WEPQOWO", "CPpPAJKF").getLengthScore());
     }
 
+    @Test
+    void returnZeroScoreWhenLengthDoublyDifferent() {
+        assertEquals(0, new Similarity("ASD", "DSADSA").getLengthScore());
+        assertEquals(0, new Similarity("ASD", "DSADSACISJD").getLengthScore());
+        assertEquals(0, new Similarity("CVISDJF", "AD").getLengthScore());
+    }
+
     private void assertIllegalArgumentException(Similarity similarity) {
         assertThrows(IllegalArgumentException.class, () -> {similarity.getLengthScore();});
     }
