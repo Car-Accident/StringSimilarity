@@ -6,15 +6,15 @@ class SimilarityTest {
 
     @Test
     void throwIllegalArgumentExceptionWhenNullString() {
-        assertIllegalArgumentException(new Similarity(null, null));
-        assertIllegalArgumentException(new Similarity(null, "DSA"));
-        assertIllegalArgumentException(new Similarity("ASD", null));
-        assertIllegalArgumentException(new Similarity("!ICd", "ADS"));
-        assertIllegalArgumentException(new Similarity("ADS", "!ICd"));
-        assertIllegalArgumentException(new Similarity("1288dCD", "DSPD"));
-        assertIllegalArgumentException(new Similarity("DSPD", "1288dCD"));
-        assertIllegalArgumentException(new Similarity("CLSOD", ""));
-        assertIllegalArgumentException(new Similarity("", "C"));
+        assertIllegalArgumentException(null, null);
+        assertIllegalArgumentException(null, "DSA");
+        assertIllegalArgumentException("ASD", null);
+        assertIllegalArgumentException("!ICd", "ADS");
+        assertIllegalArgumentException("ADS", "!ICd");
+        assertIllegalArgumentException("1288dCD", "DSPD");
+        assertIllegalArgumentException("DSPD", "1288dCD");
+        assertIllegalArgumentException("CLSOD", "");
+        assertIllegalArgumentException("", "C");
     }
 
     @Test
@@ -40,7 +40,24 @@ class SimilarityTest {
         assertEquals(0, new Similarity("CVISDJF", "AD").getLengthScore());
     }
 
-    private void assertIllegalArgumentException(Similarity similarity) {
-        assertThrows(IllegalArgumentException.class, () -> {similarity.getLengthScore();});
+    @Test
+    void returnFullScoreWhenAlphabetMatched() {
+        assertEquals(40, new Similarity("ABC", "BCA").getAlphabetScore());
+        assertEquals(40, new Similarity("CLSIDJ", "DDDCJSILLL").getAlphabetScore());
+    }
+
+    @Test
+    void returnZeroScoreWhenNoAlphabetMatched() {
+        assertEquals(0, new Similarity("ABC", "DEF").getAlphabetScore());
+        assertEquals(0, new Similarity("DWPKDJ", "ZLOE").getAlphabetScore());
+    }
+
+    @Test
+    void returnPartialScoreWhenSomeAlphabetMatched() {
+        assertEquals(6, new Similarity("ABC", "CDEF").getAlphabetScore());
+    }
+
+    private void assertIllegalArgumentException(String str1, String str2) {
+        assertThrows(IllegalArgumentException.class, () -> {new Similarity(str1, str2);});
     }
 }
