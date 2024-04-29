@@ -12,7 +12,13 @@ public class Similarity {
         if (stringArray[0].length() == stringArray[1].length()) {
             return 60;
         } else {
-            return 0;
+            if (stringArray[0].length() > stringArray[1].length()) {
+                double gap = stringArray[0].length() - stringArray[1].length();
+                return (int) ((1 - gap / stringArray[1].length()) * 60);
+            } else {
+                double gap = stringArray[1].length() - stringArray[0].length();
+                return (int) ((1 - gap / stringArray[0].length()) * 60);
+            }
         }
     }
 
