@@ -15,6 +15,14 @@ class SimilarityTest {
         assertIllegalArgumentException(new Similarity("DSPD", "1288dCD"));
     }
 
+    @Test
+    void returnFullScoreWhenLengthMatched() {
+        assertEquals(60, new Similarity("", "").getLengthScore());
+        assertEquals(60, new Similarity("ASD", "DSA").getLengthScore());
+        assertEquals(60, new Similarity("XCVPSDFK", "SPQWMFPD").getLengthScore());
+        assertEquals(60, new Similarity("Z", "A").getLengthScore());
+    }
+
     private void assertIllegalArgumentException(Similarity similarity) {
         assertThrows(IllegalArgumentException.class, () -> {similarity.getLengthScore();});
     }

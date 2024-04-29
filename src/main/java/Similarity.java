@@ -9,7 +9,11 @@ public class Similarity {
     public int getLengthScore() {
         checkStringValidation();
 
-        return 0;
+        if (stringArray[0].length() == stringArray[1].length()) {
+            return 60;
+        } else {
+            return 0;
+        }
     }
 
     private void checkStringValidation() {
