@@ -18,6 +18,16 @@ public class Similarity {
         }
     }
 
+    private boolean isStringLengthMatched() {
+        return stringArray[0].length() == stringArray[1].length();
+    }
+
+    private boolean isStringLengthDoublyDifferent() {
+        if (stringArray[0].length() >= stringArray[1].length()*2)   return true;
+        if (stringArray[1].length() >= stringArray[0].length()*2)   return true;
+        return false;
+    }
+
     private int calcPartialScore() {
         int stringLength1 = stringArray[0].length();
         int stringLength2 = stringArray[1].length();
@@ -30,16 +40,6 @@ public class Similarity {
         }
     }
 
-    private boolean isStringLengthMatched() {
-        return stringArray[0].length() == stringArray[1].length();
-    }
-
-    private boolean isStringLengthDoublyDifferent() {
-        if (stringArray[0].length() >= stringArray[1].length()*2)   return true;
-        if (stringArray[1].length() >= stringArray[0].length()*2)   return true;
-        return false;
-    }
-
     private void checkStringValidation() {
         for (String str : stringArray) {
             checkNullString(str);
@@ -48,11 +48,9 @@ public class Similarity {
         }
     }
 
-    private static void checkAlphabetString(String str) {
-        for (char ch : str.toCharArray()) {
-            if (isAlphabet(ch) == false) {
-                throw new IllegalArgumentException("String should be alphabet");
-            }
+    private static void checkNullString(String str) {
+        if (str == null) {
+            throw new IllegalArgumentException("String should not be null");
         }
     }
 
@@ -62,9 +60,11 @@ public class Similarity {
         }
     }
 
-    private static void checkNullString(String str) {
-        if (str == null) {
-            throw new IllegalArgumentException("String should not be null");
+    private static void checkAlphabetString(String str) {
+        for (char ch : str.toCharArray()) {
+            if (isAlphabet(ch) == false) {
+                throw new IllegalArgumentException("String should be alphabet");
+            }
         }
     }
 
